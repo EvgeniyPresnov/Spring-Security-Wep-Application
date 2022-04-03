@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="1" author="Evgeniy Presnov">
+        <insert tableName="book">
+            <column name="id" valueNumeric="1"/>
+            <column name="author" value="JRR Tolkien"/>
+            <column name="title" value="The Lord of the Rings"/>
+            <column name="price" value="31.43"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="2"/>
+            <column name="author" value="Jane Austen"/>
+            <column name="title" value="Pride and Prejudice"/>
+            <column name="price" value="12.32"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="3"/>
+            <column name="author" value="Philip Pullman"/>
+            <column name="title" value="His Dark Materials"/>
+            <column name="price" value="53.12"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="4"/>
+            <column name="author" value="Douglas Adams"/>
+            <column name="title" value="The Hitchhiker''s Guide to the Galaxy"/>
+            <column name="price" value="55.13"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="5"/>
+            <column name="author" value="Harper Lee"/>
+            <column name="title" value="To Kill a Mockingbird"/>
+            <column name="price" value="95.03"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="6"/>
+            <column name="author" value="AA Milne"/>
+            <column name="title" value="Winnie the Pooh"/>
+            <column name="price" value="100.32"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="7"/>
+            <column name="author" value="George Orwell"/>
+            <column name="title" value="Nineteen Eighty-Four"/>
+            <column name="price" value="123.33"/>
+        </insert>
+        <insert tableName="book">
+            <column name="id" valueNumeric="8"/>
+            <column name="author" value="CS Lewis"/>
+            <column name="title" value="The Lion, the Witch and the Wardrobe"/>
+            <column name="price" value="123.91"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
