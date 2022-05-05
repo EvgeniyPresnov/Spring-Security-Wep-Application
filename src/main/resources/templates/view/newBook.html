@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+    <title>New Book</title>
+</head>
+<body>
+
+<div class="container my-5">
+    <h3>Add a new book</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <form th:method="POST" th:action="@{/books}" th:object="${book}">
+
+                    <div class="form-group">
+                        <label for="author">Enter author: </label>
+                        <input class="form-control" th:field="*{author}" id="author" placeholder="Enter Author"
+                               type="text"/>
+                        <div th:if="${#fields.hasErrors('author')}">
+                            <div class="alert alert-danger" th:errors="*{author}">Author Error</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Enter title: </label>
+                        <input class="form-control" th:field="*{title}" id="title" placeholder="Enter Title"
+                               type="text"/>
+                        <div th:if="${#fields.hasErrors('title')}">
+                            <div class="alert alert-danger" th:errors="*{title}">Title Error</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Enter price: </label>
+                        <input class="form-control" th:field="*{price}" id="price" placeholder="Enter Price"
+                               type="text">
+                        <div th:if="${#fields.hasErrors('price')}">
+                            <div class="alert alert-danger" th:errors="*{price}">Price Error</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Create a book">
+                    <!--</div>-->
+                        <input class="btn btn-primary" th:href="@{/books/list}" type="submit" value="Back to list">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
