@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+    <title>Info about Book by Id</title>
+</head>
+<body>
+
+<div class="container my-5">
+    <h3>Info about the book by id</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <Th>Price</Th>
+                    </tr>
+                    <tr>
+                        <td th:text="${book.id}"/>
+                        <td th:text="${book.author}"/>
+                        <td th:text="${book.title}"/>
+                        <td th:text="${book.price}"/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
