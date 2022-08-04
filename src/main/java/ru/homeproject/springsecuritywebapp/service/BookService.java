@@ -42,16 +42,6 @@ public class BookService {
     }
 
     /**
-     * The methods returns the book by id.
-     *
-     * @param id
-     * @return the book by id
-     */
-//    public Book getBookById(int id, Book book) {
-//        return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id, book));
-//    }
-
-    /**
      * The method adds a new book to database.
      *
      * @param book
