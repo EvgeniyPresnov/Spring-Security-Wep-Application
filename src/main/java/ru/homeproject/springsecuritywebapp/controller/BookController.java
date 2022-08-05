@@ -15,7 +15,7 @@ import ru.homeproject.springsecuritywebapp.validation.BookValidator;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import static ru.homeproject.springsecuritywebapp.util.BookControllerConstants.*;
+import static ru.homeproject.springsecuritywebapp.util.BookConstants.*;
 
 /**
  * This class handles the requests which the URL ends with "/books".
