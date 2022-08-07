@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import ru.homeproject.springsecuritywebapp.handler.CustomAccessDeniedHandler;
 
 
 @Configuration
@@ -28,13 +30,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/books/list").permitAll()
-                .antMatchers("/books/info").permitAll()
+                .antMatchers("/books/info").hasAnyAuthority("USER", "TEST")
                 .antMatchers("/books/book/add").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/books/book/delete/**").hasAuthority("ADMIN")
                 .antMatchers("/books/book/edit/**").hasAuthority("ADMIN")
-                .anyRequest().permitAll()
-                .and().formLogin()
+                .anyRequest().authenticated()
+                .and().
+                formLogin().permitAll()
+                    .loginPage("/auth/login")
+                    .defaultSuccessUrl("/books/list")
+//                    .usernameParameter("username")
+//                    .passwordParameter("password")
+                .and()
+                .logout().permitAll()
+                    .logoutUrl("/auth/logout")
+                    //.logoutSuccessUrl("/books/list")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                .and()
+                //.exceptionHandling().accessDeniedPage("/auth/403")
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 ;
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
 
     @Override

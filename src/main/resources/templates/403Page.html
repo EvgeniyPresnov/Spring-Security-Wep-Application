@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP Status 403 - Access is denied</title>
+</head>
+<body>
+
+<h2>
+    <!--Username : ${username} </br>-->
+    <!--you don't have permission to access this page! -->
+    <!--<dev p th:text="${#httpServletServerRequest.remoteUser}"/>-->
+    <td th:text="${user}"/>
+</h2>
+</body>
+</html>

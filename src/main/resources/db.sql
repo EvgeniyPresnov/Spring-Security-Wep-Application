@@ -27,3 +27,4 @@ create table users (
 
 insert into users values (1, 'admin','$2a$12$EnBuLPlB05PGcCASZgbc/uzRRKGZb2G0L78f6R2g0/B3.NLn/HTBu', 'ADMIN');
 insert into users values (2, 'user', '$2a$12$hTuYqdgqQpZo.fIkqnD20.wyCuyps8UPNFy/FA6Tgsu648YJ4m9xG', 'USER');
+insert into users values (3, 'test', '$2a$12$Zk7wSqqIhJx2hfgCSEVGwOcHfkL8v44DA8ERMBhFlSrSEWkjX1XwC', 'TEST');
