@@ -1,26 +1,42 @@
 package ru.homeproject.springsecuritywebapp.handler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
+import ru.homeproject.springsecuritywebapp.service.impl.UserDetailsServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Collection;
 
-
+//@Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        Authentication auth
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
+        Authentication authentication
                 = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            System.out.println("User: " + auth.getName()
-                    + " attempted to access the protected URL: "
+
+        String username = userDetailsService.loadUserByUsername(authentication.getName()).getUsername();
+        String password = userDetailsService.loadUserByUsername(authentication.getName()).getPassword();
+        Collection<? extends GrantedAuthority> authorities =
+                userDetailsService.loadUserByUsername(authentication.getName()).getAuthorities();
+
+        if (authentication != null) {
+            System.out.println("The user with " +
+                    "username = " + username + ", "  +
+                    "password = " + password + ", " +
+                    "authorities = " + authorities +
+                    " is attempted to access the protected URL: "
                     + request.getRequestURI());
         }
         response.sendRedirect(request.getContextPath() + "/auth/403");

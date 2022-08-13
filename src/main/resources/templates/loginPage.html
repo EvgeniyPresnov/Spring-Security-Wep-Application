@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
@@ -11,17 +11,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="col-md-8">
-                    <form  class="form-signin" th:method="POST" th:action="@{/auth/login}">
-                        <h2 class="form-signin-heading">Please sign in</h2>
+                    <form  th:method="POST" th:action="@{/auth/login}" th:object="${user}">
+                        <h2>Please log in</h2>
 
                         <div th:if="${param.error}">
-                            <div class="alert alert-danger">
+                            <div class="atert alert-danger">
                                 Invalid username and password.
-                            </div>
-                        </div>
-                        <div th:if="${param.logout}">
-                            <div class="alert alert-info">
-                                You have been logged out.
                             </div>
                         </div>
 
@@ -35,10 +30,11 @@
                             <label for="password">Enter password: </label>
                             <input class="form-control" name="password" id="password" placeholder="Enter password"
                                    type="password"/>
-                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </div>
 
                         <div>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
                         </div>
 
                     </form>

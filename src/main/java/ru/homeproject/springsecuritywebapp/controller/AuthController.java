@@ -2,35 +2,32 @@ package ru.homeproject.springsecuritywebapp.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ru.homeproject.springsecuritywebapp.entity.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
 
     @GetMapping("/login")
-    public String login() {
-
+    public String login(String error) {
+        if (error != null) {
+            System.out.println("Invalid username and password");
+        }
         return "loginPage";
     }
 
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("The user is log out: " + authentication);
-        if (authentication != null) {
-            new SecurityContextLogoutHandler().logout(request, response, authentication);
+    @PostMapping("/login")
+    public String in(@ModelAttribute("user") @Validated User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "loginPage";
         }
-
-        return "redirect:/books/list";
+        return "/view/books";
     }
 
     @GetMapping("/403")

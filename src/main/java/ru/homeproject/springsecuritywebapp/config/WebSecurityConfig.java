@@ -13,7 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import ru.homeproject.springsecuritywebapp.handler.CustomAccessDeniedHandler;
+import ru.homeproject.springsecuritywebapp.handler.CustomAuthenticationSuccessHandler;
+import ru.homeproject.springsecuritywebapp.handler.CustomLogoutSuccessHandler;
 
 
 @Configuration
@@ -35,20 +40,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/books/book/delete/**").hasAuthority("ADMIN")
                 .antMatchers("/books/book/edit/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
-                .and().
-                formLogin().permitAll()
+                .and()
+                .formLogin().permitAll()
                     .loginPage("/auth/login")
-                    .defaultSuccessUrl("/books/list")
-//                    .usernameParameter("username")
-//                    .passwordParameter("password")
+                    .defaultSuccessUrl("/auth/login")
+                    .successHandler(authenticationSuccessHandler())
                 .and()
                 .logout().permitAll()
                     .logoutUrl("/auth/logout")
-                    //.logoutSuccessUrl("/books/list")
+                    .logoutSuccessHandler(logoutSuccessHandler())
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
                 .and()
-                //.exceptionHandling().accessDeniedPage("/auth/403")
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 ;
     }
@@ -56,6 +59,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
     }
 
     @Override
