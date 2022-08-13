@@ -1,5 +1,6 @@
 package ru.homeproject.springsecuritywebapp.handler;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 
-//@Component
+import static ru.homeproject.springsecuritywebapp.util.AuthConstants.USER_LOG_IN;
+
+@Log4j2
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
@@ -32,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 "password = " + password + ", " +
                 "authorities = " + authorities +
                 " is log in");
-
+        log.warn(String.format(USER_LOG_IN, username, password, authorities));
         response.sendRedirect(request.getContextPath() + "/books/list");
     }
 
