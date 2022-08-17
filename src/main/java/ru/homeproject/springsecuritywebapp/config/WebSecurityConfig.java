@@ -15,14 +15,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import ru.homeproject.springsecuritywebapp.handler.CustomAccessDeniedHandler;
 import ru.homeproject.springsecuritywebapp.handler.CustomAuthenticationSuccessHandler;
 import ru.homeproject.springsecuritywebapp.handler.CustomLogoutSuccessHandler;
+
+import javax.sql.DataSource;
 
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     @Qualifier("userDetailsServiceImpl")
@@ -52,7 +59,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                .and()
+                .rememberMe()
+                    .tokenRepository(persistentTokenRepository())
+                    .userDetailsService(userDetailsService)
+                    .key("secretKey")
                 ;
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+        db.setDataSource(dataSource);
+        return db;
     }
 
     @Bean
