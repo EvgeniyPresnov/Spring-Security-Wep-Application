@@ -67,6 +67,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 ;
     }
 
+    /**
+     * This method stores the generated tokens in persistent_logins table.
+     *
+     * @return a database table.
+     */
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
