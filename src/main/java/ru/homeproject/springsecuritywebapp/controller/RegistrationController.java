@@ -35,7 +35,8 @@ public class RegistrationController {
     }
 
     @GetMapping("/users")
-    public String usersList() {
+    public String usersList(Model model) {
+        model.addAttribute("users", userService.getUsers());
         return "users";
     }
 }
