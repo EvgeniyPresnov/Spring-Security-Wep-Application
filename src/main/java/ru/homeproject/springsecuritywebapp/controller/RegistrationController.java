@@ -33,4 +33,9 @@ public class RegistrationController {
         userService.createUser(user);
         return "redirect:/books/list";
     }
+
+    @GetMapping("/users")
+    public String usersList() {
+        return "users";
+    }
 }

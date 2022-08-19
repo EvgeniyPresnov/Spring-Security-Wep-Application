@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/books/book/delete/**").hasAuthority("ADMIN")
                 .antMatchers("/books/book/edit/**").hasAuthority("ADMIN")
                 .antMatchers("/accounts/registration").permitAll()
+                .antMatchers("/accounts/users").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
