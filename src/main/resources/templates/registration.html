@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create an user</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container my-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <form  th:method="POST" th:action="@{/accounts/registration}" th:object="${user}">
+                    <h2 class="form-signin-heading">Registration a new account</h2>
+
+                    <div class="form-group">
+                        <label for="username">Enter username: </label>
+                            <div class="input-group">
+                                <input class="form-control" th:field="*{userName}" name="username"
+                                       id="username" placeholder="Enter username" type="text"/>
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Enter password: </label>
+                            <div class="input-group">
+                                <input class="form-control" th:field="*{password}" name="password"
+                                       id="password" placeholder="Enter password" type="password"/>
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Select a role:</label>
+                        <select name="role" id="role" th:field="*{roles}">
+                            <option hidden value=""/>
+                            <option
+                                    th:each="role : ${T(ru.homeproject.springsecuritywebapp.model.Role).values()}"
+                                    th:text="${role}"
+                                    th:value="${role}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Create User</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

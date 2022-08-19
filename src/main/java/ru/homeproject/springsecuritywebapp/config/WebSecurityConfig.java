@@ -28,6 +28,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final int EXPIRE_TIME = 60 * 60 * 24; // 1 day
+
     @Autowired
     private DataSource dataSource;
 
@@ -45,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/books/book/add").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/books/book/delete/**").hasAuthority("ADMIN")
                 .antMatchers("/books/book/edit/**").hasAuthority("ADMIN")
+                .antMatchers("/accounts/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
@@ -61,9 +64,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and()
                 .rememberMe()
+                    .rememberMeParameter("remember")
+                    .key("secretKey")
+                    .tokenValiditySeconds(EXPIRE_TIME)
                     .tokenRepository(persistentTokenRepository())
                     .userDetailsService(userDetailsService)
-                    .key("secretKey")
                 ;
     }
 
