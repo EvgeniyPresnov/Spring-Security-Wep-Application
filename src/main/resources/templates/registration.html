@@ -19,18 +19,20 @@
 
                     <div class="form-group">
                         <label for="username">Enter username: </label>
-                            <div class="input-group">
-                                <input class="form-control" th:field="*{userName}" name="username"
-                                       id="username" placeholder="Enter username" type="text"/>
-                            </div>
+                        <input class="form-control" th:field="*{userName}" name="username"
+                               id="username" placeholder="Enter username" type="text"/>
+                        <div th:if="${#fields.hasErrors('userName')}">
+                            <div class="alert alert-danger" th:errors="*{userName}">Username Error</div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Enter password: </label>
-                            <div class="input-group">
-                                <input class="form-control" th:field="*{password}" name="password"
-                                       id="password" placeholder="Enter password" type="password"/>
-                            </div>
+                        <input class="form-control" th:field="*{password}" name="password"
+                               id="password" placeholder="Enter password" type="password"/>
+                        <div th:if="${#fields.hasErrors('password')}">
+                            <div class="alert alert-danger" th:errors="*{password}">Password Error</div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -43,6 +45,9 @@
                                     th:value="${role}">
                             </option>
                         </select>
+                        <div th:if="${#fields.hasErrors('roles')}">
+                            <div class="alert alert-danger" th:errors="*{roles}">Role Error</div>
+                        </div>
                     </div>
 
                     <div>
