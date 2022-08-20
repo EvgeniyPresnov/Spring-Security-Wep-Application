@@ -9,7 +9,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ru.homeproject.springsecuritywebapp.entity.User;
 import ru.homeproject.springsecuritywebapp.service.UserService;
-import ru.homeproject.springsecuritywebapp.validation.UserValidator;
+import ru.homeproject.springsecuritywebapp.validation.UserRegistrationValidator;
 
 /**
  * This class handles the requests which the URL ends with "/accounts".
@@ -21,11 +21,11 @@ import ru.homeproject.springsecuritywebapp.validation.UserValidator;
 public class RegistrationController {
 
     @Autowired
-    private UserValidator userValidator;
+    private UserRegistrationValidator userRegistrationValidator;
 
     @InitBinder
     private void initBinder(WebDataBinder binder) {
-        binder.setValidator(userValidator);
+        binder.setValidator(userRegistrationValidator);
     }
 
     @Autowired
