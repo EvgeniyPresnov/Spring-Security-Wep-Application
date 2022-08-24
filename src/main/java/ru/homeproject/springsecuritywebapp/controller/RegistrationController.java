@@ -52,4 +52,10 @@ public class RegistrationController {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
+
+    @GetMapping("/user/delete/{id}")
+    public String deleteUserById(@PathVariable("id") int id) {
+        userService.deleteUserById(id);
+        return "redirect:/accounts/users";
+    }
 }
