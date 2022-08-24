@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.homeproject.springsecuritywebapp.entity.User;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -36,11 +37,12 @@ public class AuthController {
      * @return login page
      */
     @GetMapping("/login")
-    public String login(String error) {
+    public String login(String error, User user, Model model) {
         if (error != null) {
             System.out.println("Invalid username and password");
             log.info(String.format(INVALID_INPUT_DATA));
         }
+        model.addAttribute("user", user);
         return "loginPage";
     }
 
