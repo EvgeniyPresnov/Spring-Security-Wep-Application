@@ -39,8 +39,8 @@ public class AuthController {
     @GetMapping("/login")
     public String login(String error, User user, Model model) {
         if (error != null) {
-            System.out.println("Invalid username and password");
-            log.info(String.format(INVALID_INPUT_DATA));
+            log.info(INVALID_INPUT_DATA);
+            return "loginPage";
         }
         model.addAttribute("user", user);
         return "loginPage";

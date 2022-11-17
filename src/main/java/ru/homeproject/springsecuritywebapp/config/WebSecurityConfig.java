@@ -29,6 +29,7 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final int EXPIRE_TIME = 60 * 60 * 24; // 1 day
+    private static final int STRENGTH_PASSWORD = 12;
 
     @Autowired
     private DataSource dataSource;
@@ -107,7 +108,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder(STRENGTH_PASSWORD);
     }
 
     @Bean

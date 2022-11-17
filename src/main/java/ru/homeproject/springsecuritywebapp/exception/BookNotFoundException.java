@@ -16,8 +16,4 @@ public class BookNotFoundException extends RuntimeException {
     public BookNotFoundException(int id) {
         log.error(String.format(BOOK_NOT_FIND_BY_ID, id));
     }
-
-    public BookNotFoundException(int id, Book book) {
-        log.error(String.format(BOOK_NOT_FIND, book, id));
-    }
 }

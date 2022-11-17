@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 import ru.homeproject.springsecuritywebapp.entity.User;
 
 @Component
-public class UserRegistrationValidator implements Validator {
+public class RegistrationValidator implements Validator {
 
     private static final String USERNAME_INPUT_PARAMETER = "userName";
     private static final String PASSWORD_INPUT_PARAMETER = "password";
