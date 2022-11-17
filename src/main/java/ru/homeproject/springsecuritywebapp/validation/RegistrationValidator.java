@@ -6,6 +6,10 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import ru.homeproject.springsecuritywebapp.entity.User;
 
+/**
+ * The custom validator to validate for multiple fields on registration form.
+ *
+ */
 @Component
 public class RegistrationValidator implements Validator {
 

@@ -37,16 +37,29 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    /**
+     * The method handles the request for registration in data base.
+     *
+     * @param model
+     * @return the registration form
+     */
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("user", new User());
         return "registration";
     }
 
+    /**
+     * The method invokes for filling user's data on form registration.
+     *
+     * @param user
+     * @param bindingResult the object that can check errors and returns them
+     * @return
+     */
     @PostMapping("/registration")
     public String createAccount(@ModelAttribute("user") @Validated User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println("Validation error!");
+            log.warn("Validation error on registration form");
             return "registration";
         }
         try {
@@ -60,12 +73,24 @@ public class RegistrationController {
         return "redirect:/books/list";
     }
 
+    /**
+     * The method handles the request for displaying users.
+     *
+     * @param model
+     * @return the users form
+     */
     @GetMapping("/users")
     public String usersList(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
 
+    /**
+     * the method handles the request for deleting the user by id.
+     *
+     * @param id
+     * @return the users form
+     */
     @GetMapping("/user/delete/{id}")
     public String deleteUserById(@PathVariable("id") int id) {
         userService.deleteUserById(id);
