@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import ru.homeproject.springsecuritywebapp.handler.CustomAccessDeniedHandler;
 import ru.homeproject.springsecuritywebapp.handler.CustomAuthenticationSuccessHandler;
 import ru.homeproject.springsecuritywebapp.handler.CustomLogoutSuccessHandler;
+import ru.homeproject.springsecuritywebapp.service.impl.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
 
@@ -111,6 +112,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(STRENGTH_PASSWORD);
     }
 
+    /**
+     * The method provides an DaoAuthenticationProvider for performing authentication.
+     *
+     * @return the user details from a {@link UserDetailsServiceImpl#loadUserByUsername(String)}
+     *
+     */
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();

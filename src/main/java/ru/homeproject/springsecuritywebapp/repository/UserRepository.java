@@ -5,6 +5,10 @@ import ru.homeproject.springsecuritywebapp.entity.User;
 
 import java.util.Optional;
 
+/**
+ * This interface provides the CRUD operation to User object.
+ *
+ */
 public interface UserRepository extends JpaRepository<User, Integer> {
    Optional<User> findByUserName(String userName);
 }

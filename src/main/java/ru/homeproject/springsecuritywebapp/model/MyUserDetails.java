@@ -10,6 +10,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *  This custom class that contains information to build an authentication object.
+ *
+ */
 public class MyUserDetails implements UserDetails {
 
     private String userName;

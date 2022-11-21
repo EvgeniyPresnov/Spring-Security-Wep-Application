@@ -12,12 +12,23 @@ import ru.homeproject.springsecuritywebapp.repository.UserRepository;
 
 import java.util.Optional;
 
+/**
+ * This class is used to retrieve the user's authentication information.
+ *
+ */
 @Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * The method returns the user details in the UserDetails object
+     *
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException if user doesn't find by username in data base
+     */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

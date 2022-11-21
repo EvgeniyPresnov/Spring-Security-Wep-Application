@@ -17,6 +17,10 @@ import java.util.Collection;
 
 import static ru.homeproject.springsecuritywebapp.util.AuthConstants.USER_ACCESS_DENIED;
 
+/**
+ * This class handles the process of a user attempts to access a page that it hasn't any authority.
+ *
+ */
 @Log4j2
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 

@@ -15,6 +15,10 @@ import java.util.Collection;
 
 import static ru.homeproject.springsecuritywebapp.util.AuthConstants.USER_LOG_OUT;
 
+/**
+ * This class handles success user's logout.
+ *
+ */
 @Log4j2
 public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 

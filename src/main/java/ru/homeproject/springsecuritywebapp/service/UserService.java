@@ -9,6 +9,10 @@ import ru.homeproject.springsecuritywebapp.repository.UserRepository;
 
 import java.util.List;
 
+/**
+ * This class provides the business logic about users.
+ *
+ */
 @Service
 public class UserService {
 
@@ -24,10 +28,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * The method saves a new user in data base
+     *
+     * @param user
+     */
     public void createUser(User user) {
         if (isUserExist(user)) {
-            System.out.println("User already exists in database");
-            throw new UserAlreadyExistException("User already exists in database");
+            throw new UserAlreadyExistException(String.format(USER_ALREADY_EXIST_ERROR, user.getUserName()));
         }
         User newUser = new User();
         newUser.setUserName(user.getUserName());
@@ -36,16 +44,27 @@ public class UserService {
         userRepository.save(newUser);
     }
 
+    /**
+     * The method deletes the user by id
+     *
+     * @param id
+     */
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
     }
 
+    /**
+     * The method checks existing the user's username in data base
+     *
+     * @param user
+     * @return
+     * @throws UserAlreadyExistException if user doesn't exist in data base
+     */
     private boolean isUserExist(User user) throws UserAlreadyExistException {
         List<User> users = getUsers();
         for (User i: users) {
             if (i.getUserName().equals(user.getUserName())) {
-                //System.out.println("User already exists in database");
-                throw new UserAlreadyExistException(String.format(USER_ALREADY_EXIST_ERROR, user.getUserName()));
+                return true;
             }
         }
         return false;

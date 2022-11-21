@@ -14,6 +14,10 @@ import java.util.Collection;
 
 import static ru.homeproject.springsecuritywebapp.util.AuthConstants.USER_LOG_IN;
 
+/**
+ * This class handles success user's login.
+ *
+ */
 @Log4j2
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
