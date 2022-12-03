@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.homeproject.springsecuritywebapp.entity.Book;
 
 /**
- * This interface is responsible for the basic CRUD operations on Book object.
+ * This interface is responsible for the basic CRUD operations to Book object.
  *
  */
 @Repository

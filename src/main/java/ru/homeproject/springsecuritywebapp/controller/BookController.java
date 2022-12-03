@@ -15,7 +15,7 @@ import ru.homeproject.springsecuritywebapp.validation.BookValidator;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import static ru.homeproject.springsecuritywebapp.util.BookControllerConstants.*;
+import static ru.homeproject.springsecuritywebapp.util.BookConstants.*;
 
 /**
  * This class handles the requests which the URL ends with "/books".
@@ -109,7 +109,7 @@ public class BookController {
      *
      * @param id
      * @param model
-     * @return
+     * @return the edit form
      */
     @GetMapping("/book/edit/{id}")
     public String editToUpdateBookById(@PathVariable("id") int id, Model model) {
@@ -122,7 +122,7 @@ public class BookController {
      *
      * @param id
      * @param book
-     * @return the form that displays boo
+     * @return the form that displays books
      */
     @PostMapping("/book/{id}")
     public String updateBookById(@PathVariable("id") int id,

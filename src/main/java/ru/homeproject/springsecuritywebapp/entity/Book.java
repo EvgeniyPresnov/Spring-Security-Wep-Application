@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

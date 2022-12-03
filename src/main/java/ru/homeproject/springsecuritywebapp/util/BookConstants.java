@@ -8,7 +8,7 @@ import lombok.experimental.UtilityClass;
  */
 
 @UtilityClass
-public final class BookControllerConstants {
+public final class BookConstants {
     public static final String START_LOGGING = "--- Logging BookController is started ---";
     public static final String STOP_LOGGING = "--- Logging BookController is stopped ---";
 
